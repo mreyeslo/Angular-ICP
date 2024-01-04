@@ -1,6 +1,16 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from './environments/environment';
+import { TerminalModule } from 'primeng/terminal';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+if (environment.production) {
+  enableProdMode();
+}
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(HttpClientModule, TerminalModule),
+  ]
+});
+
