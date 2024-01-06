@@ -1,16 +1,13 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { AppComponent } from './app/app.component';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { TerminalModule } from 'primeng/terminal';
 
 if (environment.production) {
   enableProdMode();
 }
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(HttpClientModule, TerminalModule),
-  ]
-});
 
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));

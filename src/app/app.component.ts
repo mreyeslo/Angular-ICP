@@ -1,27 +1,38 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MotokoService } from "./motoko.service";
 import { ButtonModule } from 'primeng/button';
-import { TerminalModule } from 'primeng/terminal';
+import { Terminal, TerminalModule } from 'primeng/terminal';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: true,
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  public title = 'hello-angular-motoko';
+export class AppComponent implements OnInit{
+  public text = null;
   public response = 'Nothing yet';
   public duration: number = 0;
 
-  constructor(private motokoService: MotokoService){
+  constructor(private motokoService: MotokoService, private router: Router){
   }
-
-  public async getResponse(username:string = 'Angular'){
+  ngOnInit(): void {
+      this.add(Date.now().toString())
+  }
+  public async add(username:string = 'Angular'){
     const start = Date.now();
 	  console.log("start request")
-    this.response = await this.motokoService.greet(username);
+    this.response = await this.motokoService.add(username);
     this.duration = Date.now() - start;
     console.log("request time", this.duration)
+  }
+  public async get(){
+    this.response = await this.motokoService.getAll();
+    console.log("request time", this.response)
+  }
+
+
+  route(){
+    this.router.navigateByUrl("dock");
   }
 }

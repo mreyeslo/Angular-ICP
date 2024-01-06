@@ -8,16 +8,20 @@ const motokoCreateActor = require('src/declarations/motoko').createActor;
 export class MotokoService {
   private motokoActor = motokoCreateActor(environment.MOTOKO_CANISTER_ID, {
     agentOptions: {
-        host: environment.MOTOKO_CANISTER_HOST
+      host: environment.MOTOKO_CANISTER_HOST
     }
   });
 
-  constructor() {}
+  constructor() { }
 
-  public async greet(name:string): Promise<any>{
+  public async greet(name: string): Promise<any> {
     return await this.motokoActor.greet(name);
   }
-  public async test(): Promise<any>{
-    return await this.motokoActor.test();
+  public async add(data: any): Promise<any> {
+    var date = Date.now().toString()
+    return await this.motokoActor.addItem({ id: date, content: date });
+  }
+  public async getAll(): Promise<any> {
+    return await this.motokoActor.getAll();
   }
 }

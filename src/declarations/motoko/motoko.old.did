@@ -1,4 +1,11 @@
+type Item = 
+ record {
+   content: text;
+   id: text;
+ };
 service : {
+  addItem: (Item) -> (opt Item) query;
+  getAll: () -> (vec text) query;
   greet: (text) -> (text) query;
   test: () -> (text) query;
 }
