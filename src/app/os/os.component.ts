@@ -33,6 +33,7 @@ export class OSComponent implements OnInit {
     subscription: Subscription | undefined;
     visible = false;
     response = null;
+    header ="";
     public today = Date.now();
 
     constructor(private galleriaService: PhotoService, private nodeService: NodeService,
