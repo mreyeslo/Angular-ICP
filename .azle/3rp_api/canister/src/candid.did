@@ -1,0 +1,8 @@
+service: () -> {
+    clearOrganization: (text) -> (vec text) query;
+    getFromKey: (text) -> (opt record {id:text; internetIdentity:principal; username:text}) query;
+    insertOrganization: (text, principal) -> (text);
+    itemsOrganization: (nat32) -> (vec record {text; record {id:text; internetIdentity:principal; username:text}}) query;
+    keysOrganization: (nat32) -> (vec text) query;
+    valuesOrganization: (nat32) -> (vec record {id:text; internetIdentity:principal; username:text}) query;
+}

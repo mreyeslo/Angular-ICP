@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+
 const motokoCreateActor = require('src/declarations/motoko').createActor;
 
 @Injectable({
@@ -19,9 +20,9 @@ export class MotokoService {
   }
   public async add(data: any): Promise<any> {
     var date = Date.now().toString()
-    return await this.motokoActor.addItem({ id: date, content: date });
+    return await this.motokoActor.addData("wallet","asdasdas");
   }
   public async getAll(): Promise<any> {
-    return await this.motokoActor.getAll();
+    return await this.motokoActor.getData();
   }
 }

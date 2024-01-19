@@ -1,0 +1,38 @@
+app-landing {
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    header {
+        background: #005792;
+        color: #fff;
+        padding-top: 30px;
+        min-height: 70px;
+        border-bottom: #0288d1 3px solid;
+    }
+
+
+    p {
+        font-size: 1.2em;
+        padding: 20px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+    .roadmap-section {
+        background: #f4f4f4;
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .roadmap-section h2 {
+        color: #005792;
+    }
+}

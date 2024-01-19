@@ -4,16 +4,16 @@
   "config": {
     "http_handler": {
       "port": null,
-      "write_port_to": "/Users/sh-admin/Documents/dev/Angular-ICP/.dfx/network/local/replica-configuration/replica-1.port"
+      "write_port_to": "/Users/michaelreyes/Desktop/dev/Angular-ICP/.dfx/network/local/replica-configuration/replica-1.port"
     },
     "state_manager": {
-      "state_root": "/Users/sh-admin/Documents/dev/Angular-ICP/.dfx/network/local/state/replicated_state"
+      "state_root": "/Users/michaelreyes/Desktop/dev/Angular-ICP/.dfx/network/local/state/replicated_state"
     },
     "crypto": {
-      "crypto_root": "/Users/sh-admin/Documents/dev/Angular-ICP/.dfx/network/local/state/crypto_store"
+      "crypto_root": "/Users/michaelreyes/Desktop/dev/Angular-ICP/.dfx/network/local/state/crypto_store"
     },
     "artifact_pool": {
-      "consensus_pool_path": "/Users/sh-admin/Documents/dev/Angular-ICP/.dfx/network/local/state/consensus_pool"
+      "consensus_pool_path": "/Users/michaelreyes/Desktop/dev/Angular-ICP/.dfx/network/local/state/consensus_pool"
     },
     "subnet_type": "application",
     "btc_adapter": {
@@ -22,7 +22,7 @@
     },
     "canister_http_adapter": {
       "enabled": true,
-      "socket_path": "/var/folders/jh/zpywpfb12lj2143mp4gckf380000gn/T/ic-https-outcalls-adapter-socket.7774.1704568026"
+      "socket_path": "/var/folders/bh/76f4xryn38nf8w6j3gbjt1yh0000gn/T/ic-https-outcalls-adapter-socket.68612.1705464171"
     },
     "log_level": "error",
     "artificial_delay": 600,

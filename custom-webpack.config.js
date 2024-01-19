@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-const localCanisterHost = 'http://127.0.0.1:8001';
+const localCanisterHost = 'http://127.0.0.1:8002';
 const productionCanisterHost = 'https://ic0.app';
 const network = process.env.DFX_NETWORK || (process.env.NODE_ENV === "production" ? "ic" : "local");
 let localCanisters, prodCanisters, canisters, canisterHost;
@@ -59,7 +59,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:8001",
+        target: "http://localhost:8002",
         changeOrigin: true,
         pathRewrite: {
           "^/api": "/api",

@@ -15,14 +15,16 @@
         0% {
             background-position: 0% 0%;
         }
+
         50% {
             background-position: 100% 100%;
         }
+
         100% {
             background-position: 0% 0%;
         }
     }
-    
+
     .wave {
         background: rgb(255 255 255 / 25%);
         border-radius: 1000% 1000% 0 0;
@@ -36,45 +38,56 @@
         left: 0;
         z-index: -1;
     }
-    
+
     .wave:nth-of-type(2) {
         bottom: -1.25em;
         animation: wave 18s linear reverse infinite;
         opacity: 0.8;
     }
-    
+
     .wave:nth-of-type(3) {
         bottom: -2.5em;
         animation: wave 20s -1s reverse infinite;
         opacity: 0.9;
     }
-    
+
     @keyframes wave {
         2% {
             transform: translateX(1);
         }
-    
+
         25% {
             transform: translateX(-25%);
         }
-    
+
         50% {
             transform: translateX(-50%);
         }
-    
+
         75% {
             transform: translateX(-25%);
         }
-    
+
         100% {
             transform: translateX(1);
         }
     }
+
     .p-dock {
         z-index: 1000;
     }
 
     .dock-advanced {
+        .grid{
+            div{
+                text-align: center;
+                .p-button{
+                    width: 90%;
+                    display: inline-block !important;
+                }
+            }
+        }
+
         .p-dialog-mask,
         .p-toast {
             position: absolute;
@@ -83,6 +96,13 @@
         .p-dialog {
             .p-dialog-header {
                 padding: .2rem;
+                justify-content: left;
+                .p-dialog-header-icon:last-child {
+                    margin-right: 0;
+                    background-color: red;
+                    color: black;
+                    font-size: xx-large;
+                }
             }
 
             .p-dialog-content {
@@ -141,30 +161,38 @@
             padding: 0.5rem .75rem;
         }
 
-        .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+        .p-menubar-root-list>.p-menuitem>.p-menuitem-link {
             padding: 0.5rem .75rem;
 
-            > .p-submenu-icon {
+            >.p-submenu-icon {
                 display: none;
             }
         }
 
         .p-menubar-end {
-            span, i {
+
+            span,
+            i {
                 padding: 0 .75rem;
             }
         }
-    }
-}
 
-.dark-tooltip {
-    .p-tooltip {
-        .p-tooltip-arrow {
-            border-top-color: var(--surface-900);
-        }
-
-        .p-tooltip-text {
-            background-color: var(--surface-900);
+        .connect-button {
+            .p-button {
+                height: 10px;
+            }
         }
     }
-}
+    }
+
+    .dark-tooltip {
+        .p-tooltip {
+            .p-tooltip-arrow {
+                border-top-color: var(--surface-900);
+            }
+
+            .p-tooltip-text {
+                background-color: var(--surface-900);
+            }
+        }
+    }

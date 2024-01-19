@@ -1,5 +1,0 @@
-// Version: 1.0.0
-actor {
-  stable var base : Nat64;
-  stable var myList : [Int]
-};

@@ -1,71 +1,50 @@
-import HashMap "mo:base/HashMap";
 import Array "mo:base/Array";
-import Principal "mo:base/Principal";
-import Text "mo:base/Text";
-import Iter "mo:base/Iter";
-import Nat32 "mo:base/Nat32";
+import Debug "mo:base/Debug";
+import IC "mo:base/ExperimentalInternetComputer";
 import Nat64 "mo:base/Nat64";
-import StableMemory "mo:base/ExperimentalStableMemory";
+import Text "mo:base/Text";
+import Nat "mo:base/Nat";
+import Map "./src/Map";
+import Prim "mo:prim";
+import Set "./src/Set";
+import { ihash; nhash; n32hash; n64hash; thash; phash; bhash; lhash } "./src/Map";
 
-actor {
-  stable var myList : [Int] = [];
-  let map = HashMap.HashMap<Text, Item>(5, Text.equal, Text.hash);
-  public type Item = {
-    id : Text;
-    content : Text;
-  };
+actor main {
+  stable var websiteTemplates = Map.new<Text, Text>();
+  stable var organization = Map.new<Text, Text>();
+  stable var emails = Map.new<Text, Text>();
+  stable var wallets = Map.new<Text, Text>();
+  stable var admin = Map.new<Text, Text>();
 
-  public query func greet(name : Text) : async Text {
-    return "success";
-  };
-  public query func test() : async Text {
-    return "test from main.mo";
-  };
+  // public query func getData() : async [(Text, Text)] {
+  //   return Map.toArray(wallets);
+  // };
 
-  public query func addItem(item : Item) : async ?Item {
-    log(item.id);
-    map.put(item.id, item);
-    map.get(item.id);
-  };
-
-  public query func getAll() : async [Text] {
-    readLast(1);
-  };
-  func ensure(offset : Nat64) {
-    let pages = (offset + 65536) >> 16;
-    if (pages > StableMemory.size()) {
-      let oldsize = StableMemory.grow(pages - StableMemory.size());
-      assert (oldsize != 0xFFFF_FFFF_FFFF_FFFF);
-    };
+  public func addData(key : Text, value : Text) {
+    var z = Map.set(emails, thash, key, value);
   };
 
-  stable var base : Nat64 = 0;
-
-  func log(t : Text) {
-    let blob = Text.encodeUtf8(t);
-    let size = Nat64.fromNat(blob.size());
-    ensure(base + size + 4);
-    StableMemory.storeBlob(base, blob);
-    base += size;
-    StableMemory.storeNat32(base, Nat32.fromNat(blob.size()));
-    base += 4;
-  };
-
-  func readLast(count : Nat) : [Text] {
-    let a = Array.init<Text>(count, "");
-    var offset = base;
-    var k = 0;
-    while (k < count and offset > 0) {
-      offset -= 4;
-      let size = StableMemory.loadNat32(offset);
-      offset -= Nat64.fromNat(Nat32.toNat(size));
-      let blob = StableMemory.loadBlob(offset, Nat32.toNat(size));
-      switch (Text.decodeUtf8(blob)) {
-        case (?t) { a[k] := t };
-        case null { assert false };
-      };
-      k += 1;
-    };
-    return Array.tabulate<Text>(k, func i { a[i] });
-  };
+  // public shared ({ caller }) func ledger_transfer_icp(
+  //   icp_amount : Nat
+  // ) : async TransferResult {
+  //   var amount = Nat64.fromNat(icp_amount);
+  //   var res : TransferResult = #Err(#TxCreatedInFuture);
+  //   // let to_ai = Account.principalToSubaccount(Principal.fromText(Const.canister_project_cycles_wallet));
+  //   let to_ = Account.accountIdentifier(
+  //     Principal.fromText("3sq5w-t7zis-qf3wl-vgvih-byre2-ttswt-vzupn-6mnpw-mju7l-jhbfi-hae"),
+  //     Account.defaultSubaccount(),
+  //   );
+  //   try {
+  //     res := await public_ledger.transfer({
+  //       to = to_;
+  //       fee = { e8s = 10_000 };
+  //       memo = 0;
+  //       from_subaccount = null;
+  //       created_at_time = null;
+  //       amount = { e8s = amount - 10_000 };
+  //     });
+  //     return res;
+  //   } catch (e) {};
+  //   return res;
+  // };
 };

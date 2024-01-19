@@ -1,12 +1,32 @@
 {
   "canisters": {
-    "motoko": {
-      "main": "src/motoko/main.mo",
-      "type": "motoko"
+    "3rp_api": {
+      "type": "custom",
+      "main": "api/src/index.ts",
+      "candid": "api/src/index.did",
+      "build": "npx azle 3rp_api",
+      "wasm": ".azle/3rp_api/3rp_api.wasm",
+      "gzip": true,
+      "declarations": {
+        "output": "test/dfx_generated/3rp_api",
+        "node_compatibility": true
+      }
+    },
+    "internet_identity": {
+      "__0": "The development build of Internet Identity. For more information, see https://github.com/dfinity/internet-identity#build-features-and-flavors",
+      "type": "custom",
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz",
+      "__2": "The remote block indicates that this canister is only used locally and should not be deployed on the IC.",
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      }
     },
     "www": {
       "dependencies": [
-        "motoko"
+        "3rp_api"
       ],
       "frontend": {
         "entrypoint": "dist/www/index.html"
@@ -16,14 +36,5 @@
       ],
       "type": "assets"
     }
-  },
-  
-  "dfx": "0.15.2",
-  "networks": {
-    "local": {
-      "bind": "127.0.0.1:8001",
-      "type": "ephemeral"
-    }
-  },
-  "version": 1
+  }
 }

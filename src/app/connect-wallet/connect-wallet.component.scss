@@ -1,0 +1,26 @@
+.container {
+    header {
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-container {
+        text-align: -webkit-center;
+        width: 30%;
+    }
+
+    .login-button {
+        cursor: not-allowed;
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+        border-color: cornflowerblue;
+        background-color: black;
+        color: white;
+        border-radius: 30px 30px;
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+
+    }
+}

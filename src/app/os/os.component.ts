@@ -1,165 +1,158 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuItem, MessageService } from 'primeng/api';
-import { TerminalService } from 'primeng/terminal';
-import { Subscription } from 'rxjs';
-import { NodeService } from 'src/service/nodeservice';
-import { PhotoService } from 'src/service/photoservice';
-import { MotokoService } from '../motoko.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { NavigationEnd, Router } from "@angular/router";
+import { MenuItem, MessageService } from "primeng/api";
+import { Subscription } from "rxjs";
+import { NodeService } from "src/service/nodeservice";
+import { PhotoService } from "src/service/photoservice";
+import { MotokoService } from "../motoko.service";
+import { DappCookieService } from "../shared/services/cookie.service";
 
 @Component({
-    selector: 'os',
-    templateUrl: './os.component.html',
-    styleUrls: ['./os.component.scss'],
-    providers: [MessageService, TerminalService]
+    selector: "os",
+    templateUrl: "./os.component.html",
+    styleUrls: ["./os.component.scss"]
 })
 export class OSComponent implements OnInit {
     displayTerminal: boolean | undefined;
-
-    displayFinder: boolean | undefined;
-
-    displayGalleria: boolean | undefined;
-
-    dockItems: MenuItem[] | undefined;
-
     menubarItems: any[] | undefined;
 
     responsiveOptions: any[] | undefined;
 
-    images: any[] | undefined;
-
-    nodes: any[] | undefined;
-
-    subscription: Subscription | undefined;
-    visible = false;
+    // vars
+    application = { name: "", visible: false };
+    overlayVisible = true;
+    connectWalletVisible = false;
     response = null;
-    header ="";
+    header = "";
+    launchOverride = "";
+
     public today = Date.now();
 
-    constructor(private galleriaService: PhotoService, private nodeService: NodeService,
-        private router: Router, private messageService: MessageService, private terminalService: TerminalService,
-        private motokoService: MotokoService) {
+    constructor(
+        private router: Router,
+        private dappCookieService: DappCookieService,
+        private motokoService: MotokoService,
+
+    ) {
+        router.events.subscribe((val) => {
+            // see also
+            if (val instanceof NavigationEnd) {
+                if (val.url.includes("/application/")) {
+                    this.application.name = val.url.split("/application/")[1];
+                    this.route(this.application.name);
+                }
+            };
+        });
     }
+
+    ngOnInit() {
+        this.overlayVisible = this.dappCookieService.applicationCache.viewLaunchOverlay;
+        setInterval(() => {
+            this.today = Date.now();
+        }, 100);
+        this.getDefaultMenu();
+        this.responsiveOptions = [
+            {
+                breakpoint: "1024px",
+                numVisible: 3,
+            },
+            {
+                breakpoint: "768px",
+                numVisible: 2,
+            },
+            {
+                breakpoint: "560px",
+                numVisible: 1,
+            },
+        ];
+
+        // this.subscription = this.terminalService.commandHandler.subscribe(
+        //     (command) => this.commandHandler(command)
+        // );
+
+       
+    }
+
     addButton() {
         this.add(Date.now().toString());
         this.get();
     }
-    public async add(username: string = 'Angular') {
-        const start = Date.now();
-        console.log("start request")
-        this.response = await this.motokoService.add(username);
-        console.log(this.response)
 
+    public async add(username: string = "Angular") {
+        const start = Date.now();
+        console.log("start request");
+        this.response = await this.motokoService.add(username);
+        console.log(this.response);
     }
     public async get() {
         this.response = await this.motokoService.getAll();
-        console.log("get", this.response)
+        console.log("get", this.response);
     }
-    ngOnInit() {
+    connect(){
+        this.connectWalletVisible = true;
+    }
+    route(route: string) {
+        this.application.visible = true;
+        this.getMenu();
+        this.router.navigateByUrl("application/"+route);
+        
+    }
 
-        setInterval(() => {
-            this.today = Date.now();
-        }, 100);
+    hide() {
+        this.application.visible = false;
+        this.getDefaultMenu();
+        this.router.navigateByUrl("");
+    }
+    hideLaunchOverlay(){
+        this.overlayVisible = false; 
+        this.dappCookieService.setApplicationCookies("viewLaunchOverlay",false);
+    }
+    
+    getDefaultMenu() {
+
         this.menubarItems = [
             {
-                label: '3RP'
-            }];
-
-        this.responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 3
+                label: "3RP",
             },
-            {
-                breakpoint: '768px',
-                numVisible: 2
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1
-            }
         ];
 
-        this.subscription = this.terminalService.commandHandler.subscribe((command) => this.commandHandler(command));
-
-        this.galleriaService.getImages().then((data) => (this.images = data));
-        this.nodeService.getFiles().then((data) => (this.nodes = data));
     }
 
-    route(route: string) {
-        this.visible = true;
-        this.getMenu();
-        this.router.navigateByUrl(route);
-    }
-    hide() {
-        this.visible = false;
-        this.menubarItems = [
-            {
-                label: '3RP'
-            }];
-    }
-    commandHandler(text: any) {
-        let response;
-        let argsIndex = text.indexOf(' ');
-        let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
-
-        switch (command) {
-            case 'date':
-                response = 'Today is ' + new Date().toDateString();
-                break;
-
-            case 'greet':
-                response = 'Hola ' + text.substring(argsIndex + 1) + '!';
-                break;
-
-            case 'random':
-                response = Math.floor(Math.random() * 100);
-                break;
-
-            default:
-                response = 'Unknown command: ' + command;
-                break;
-        }
-
-        if (response) {
-            this.terminalService.sendResponse(response as string);
-        }
-    }
-
+    //todo clean this up and make it configurable, modular 
     getMenu() {
         this.menubarItems = [
             {
-                label: '3RP'
+                label: "3RP",
             },
             {
-                label: 'File',
+                label: "File",
                 items: [
                     {
-                        label: 'New',
-                        icon: 'pi pi-fw pi-plus',
+                        label: "New",
+                        icon: "pi pi-fw pi-plus",
                         items: [
                             {
-                                label: 'Bookmark',
-                                icon: 'pi pi-fw pi-bookmark'
+                                label: "Bookmark",
+                                icon: "pi pi-fw pi-bookmark",
                             },
                             {
-                                label: 'Video',
-                                icon: 'pi pi-fw pi-video'
-                            }
-                        ]
+                                label: "Video",
+                                icon: "pi pi-fw pi-video",
+                            },
+                        ],
                     },
                     {
-                        label: 'Delete',
-                        icon: 'pi pi-fw pi-trash'
+                        label: "Delete",
+                        icon: "pi pi-fw pi-trash",
                     },
                     {
-                        separator: true
+                        separator: true,
                     },
                     {
-                        label: 'Export',
-                        icon: 'pi pi-fw pi-external-link'
-                    }
-                ]
+                        label: "Export",
+                        icon: "pi pi-fw pi-external-link",
+                    },
+                ],
             },
             // {
             //     label: 'Edit',
@@ -183,45 +176,44 @@ export class OSComponent implements OnInit {
             //     ]
             // },
             {
-                label: 'Users',
+                label: "Users",
                 items: [
                     {
-                        label: 'New',
-                        icon: 'pi pi-fw pi-user-plus'
+                        label: "New",
+                        icon: "pi pi-fw pi-user-plus",
                     },
                     {
-                        label: 'Delete',
-                        icon: 'pi pi-fw pi-user-minus'
+                        label: "Delete",
+                        icon: "pi pi-fw pi-user-minus",
                     },
                     {
-                        label: 'Search',
-                        icon: 'pi pi-fw pi-users',
+                        label: "Search",
+                        icon: "pi pi-fw pi-users",
                         items: [
                             {
-                                label: 'Filter',
-                                icon: 'pi pi-fw pi-filter',
+                                label: "Filter",
+                                icon: "pi pi-fw pi-filter",
                                 items: [
                                     {
-                                        label: 'Print',
-                                        icon: 'pi pi-fw pi-print'
-                                    }
-                                ]
+                                        label: "Print",
+                                        icon: "pi pi-fw pi-print",
+                                    },
+                                ],
                             },
                             {
-                                icon: 'pi pi-fw pi-bars',
-                                label: 'List'
-                            }
-                        ]
-                    }
-                ]
+                                icon: "pi pi-fw pi-bars",
+                                label: "List",
+                            },
+                        ],
+                    },
+                ],
             },
-
         ];
-        return
+        return;
     }
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        // if (this.subscription) {
+        //     this.subscription.unsubscribe();
+        // }
     }
 }

@@ -1,8 +1,14 @@
 {
-  "__Candid_UI": {
-    "local": "bd3sg-teaaa-aaaaa-qaaba-cai"
+  "3rp_api": {
+    "local": "cpmcr-yeaaa-aaaaa-qaala-cai"
   },
-  "motoko": {
-    "local": "bkyz2-fmaaa-aaaaa-qaaaq-cai"
+  "__Candid_UI": {
+    "local": "dccg7-xmaaa-aaaaa-qaamq-cai"
+  },
+  "internet_identity": {
+    "local": "cinef-v4aaa-aaaaa-qaalq-cai"
+  },
+  "www": {
+    "local": "dfdal-2uaaa-aaaaa-qaama-cai"
   }
 }

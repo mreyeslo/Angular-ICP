@@ -1,0 +1,9 @@
+// Version: 1.0.0
+actor {
+  stable var organization :
+    [var ?([var ?Text], [var ?Text], [var Nat], [var Nat32])];
+  stable var wallets :
+    [var ?([var ?Text], [var ?Text], [var Nat], [var Nat32])];
+  stable var websiteTemplates :
+    [var ?([var ?Text], [var ?Text], [var Nat], [var Nat32])]
+};

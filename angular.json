@@ -8,6 +8,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+          ,"standalone": false
         },
         "@schematics/angular:application": {
           "strict": true
@@ -45,13 +46,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "16mb",
+                  "maximumError": "32mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "64kb",
+                  "maximumError": "128kb"
                 }
               ],
               "fileReplacements": [
@@ -115,5 +116,8 @@
       }
     }
   },
-  "defaultProject": "hello-angular-motoko"
+  "defaultProject": "hello-angular-motoko",
+  "cli": {
+    "analytics": false
+  }
 }

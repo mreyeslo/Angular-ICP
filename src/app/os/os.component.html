@@ -1,129 +1,244 @@
 <div class="card">
-    <p-menubar [model]="menubarItems">
-        <ng-template pTemplate="start">
-            <img src="/assets/3RP.png" alt="image" width="50" height="50" priority>
-        </ng-template>
-        <ng-template pTemplate="end">
-            <!-- <i class="pi pi-video"></i>
+  <p-menubar [model]="menubarItems">
+    <ng-template pTemplate="start">
+      <img src="/assets/3RP.png" alt="image" width="50" height="50" priority />
+    </ng-template>
+    <ng-template pTemplate="end">
+      <!-- <i class="pi pi-video"></i>
             <i class="pi pi-wifi"></i>
             <i class="pi pi-volume-up"></i> -->
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input type="text" pInputText [(ngModel)]="value" (click)="op.show($event)" />
-            </span>
+      <span>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="value"
+            (click)="op.show($event)"
+          />
+        </span>
 
-            <p-overlayPanel #op>
-                <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-                <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-                <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-                <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-                <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
-            </p-overlayPanel>
+        <p-overlayPanel #op>
+          <p-skeleton
+            width="10rem"
+            styleClass="mb-2"
+            borderRadius="16px"
+          ></p-skeleton>
+          <p-skeleton
+            width="10rem"
+            styleClass="mb-2"
+            borderRadius="16px"
+          ></p-skeleton>
+          <p-skeleton
+            width="10rem"
+            styleClass="mb-2"
+            borderRadius="16px"
+          ></p-skeleton>
+          <p-skeleton
+            width="10rem"
+            styleClass="mb-2"
+            borderRadius="16px"
+          ></p-skeleton>
+          <p-skeleton
+            width="10rem"
+            styleClass="mb-2"
+            borderRadius="16px"
+          ></p-skeleton>
+        </p-overlayPanel>
 
-            <span>{{today | date:'short' }}
-            </span>
-            <img src="/assets/wallet.png" alt="image" width="30" height="30" priority style="    vertical-align: sub;" (click)="addButton()">
+        <span>{{ today | date : "short" }} </span>
 
-        </ng-template>
-    </p-menubar>
-    <div class="dock-window dock-advanced">
-        <div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-        </div>
-        <div style="display: flex;justify-content: center;">
-            <p-panel [toggleable]="true" style="margin-top: 50px; width:97%">
-                <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                        <span class="font-bold">Enterprise</span>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex flex-wrap align-items-center justify-content-between gap-3">
-                        <div class="flex align-items-center gap-2">
-                            <p-button icon="pi pi-user" rounded="true" text="true"></p-button>
-                            <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true"></p-button>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="icons">
-                    <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
-                        <span class="pi pi-cog"></span>
-                    </button>
-                    <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
-                </ng-template>
-                <div class="grid">
-                    <div class="col-3">
-                        <p-button [outlined]="true" (click)="route('contacts')">
+        <p-button
+          label="Connect"
+          [text]="true"
+          [raised]="true"
+          (click)="connect()"
+          class="connect-button"
+        ></p-button>
+      </span>
+    </ng-template>
+  </p-menubar>
 
-                            CRM
-                        </p-button>
-                    </div>
-                    <div class="col-3">
-                        <p-button [outlined]="true" (click)="route('contacts')">
-
-                            HR
-                        </p-button>
-                    </div>
-                    <div class="col-3">
-                        <p-button [outlined]="true" (click)="route('legal')">
-
-                            Legal
-                        </p-button>
-                    </div>
-                    <div class="col-3">
-                        <p-button [outlined]="true" (click)="route('sales')">
-
-                            Sales
-                        </p-button>
-                    </div>
-                    
-                </div>
-
-            </p-panel>
-        </div>
-        <div style="display: flex;justify-content: center;">
-            <p-panel [toggleable]="true" style="margin-top: 50px; width:97%">
-                <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                        <span class="font-bold">Custom</span>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex flex-wrap align-items-center justify-content-between gap-3">
-                        <div class="flex align-items-center gap-2">
-                            <p-button icon="pi pi-user" rounded="true" text="true"></p-button>
-                            <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true"></p-button>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="icons">
-                    <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
-                        <span class="pi pi-cog"></span>
-                    </button>
-                    <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
-                </ng-template>
-                <div class="grid">
-                    <div class="col-3">
-                        <p-button [outlined]="true" (click)="route('web-leads')">
-                            Web Leads
-                        </p-button>
-                    </div>
-                    
-                    <div class="col-3">
-                        <p-button [outlined]="true" (click)="route('marketing')">
-                            Marketing
-                        </p-button>
-                    </div>
-                </div>
-
-            </p-panel>
-        </div>
-
-        <p-dialog [header]="header" [(visible)]="visible" (onHide)="hide()" [dismissableMask]="true" [closable]="true"
-            [style]="{width: '98vw',height:'100vw',top:'-30px'}" [minY]="60" [resizable]="true">
-            <router-outlet></router-outlet>
-
-        </p-dialog>
+  <div class="dock-window dock-advanced dapp-buttons-grid">
+    <div>
+      <div class="wave"></div>
+      <div class="wave"></div>
     </div>
+
+    <!-- Management -->
+    <div
+      style="display: flex; justify-content: center"
+      class="dapp-buttons-grid"
+    >
+      <p-panel [toggleable]="true" style="margin-top: 50px; width: 97%">
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center gap-2">
+            <span class="font-bold">Admin Management</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div
+            class="flex flex-wrap align-items-center justify-content-between gap-3"
+          >
+            <div class="flex align-items-center gap-2">
+              <!-- <p-button icon="pi pi-user" rounded="true" text="true"></p-button>
+                            <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true"></p-button> -->
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+          <button
+            class="p-panel-header-icon p-link mr-2"
+            (click)="menu.toggle($event)"
+          ></button>
+          <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
+        </ng-template>
+        <div class="grid">
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('organization')">
+              Organization
+            </p-button>
+          </div>
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('users')">
+              Users
+            </p-button>
+          </div>
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('website')">
+              Website
+            </p-button>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <!-- Enterprise -->
+    <div style="display: flex; justify-content: center">
+      <p-panel [toggleable]="true" style="margin-top: 50px; width: 97%">
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center gap-2">
+            <span class="font-bold">Enterprise</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div
+            class="flex flex-wrap align-items-center justify-content-between gap-3"
+          >
+            <div class="flex align-items-center gap-2">
+              <!-- <p-button icon="pi pi-user" rounded="true" text="true"></p-button>
+                            <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true"></p-button> -->
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+          <button
+            class="p-panel-header-icon p-link mr-2"
+            (click)="menu.toggle($event)"
+          ></button>
+          <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
+        </ng-template>
+        <div class="grid">
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('crm')"> CRM </p-button>
+          </div>
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('hr')"> HR </p-button>
+          </div>
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('legal')">
+              Legal
+            </p-button>
+          </div>
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('sales')">
+              Sales
+            </p-button>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <div style="display: flex; justify-content: center">
+      <p-panel [toggleable]="true" style="margin-top: 50px; width: 97%">
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center gap-2">
+            <span class="font-bold">Custom</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div
+            class="flex flex-wrap align-items-center justify-content-between gap-3"
+          >
+            <div class="flex align-items-center gap-2">
+              <!-- <p-button icon="pi pi-user" rounded="true" text="true"></p-button>
+                            <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true"></p-button> -->
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="icons">
+          <button
+            class="p-panel-header-icon p-link mr-2"
+            (click)="menu.toggle($event)"
+          ></button>
+          <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
+        </ng-template>
+        <div class="grid">
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('web-leads')">
+              Web Leads
+            </p-button>
+          </div>
+
+          <div class="col-3">
+            <p-button [outlined]="true" (click)="route('marketing')">
+              Marketing
+            </p-button>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <p-dialog
+      [header]="header"
+      [(visible)]="application.visible"
+      (onHide)="hide()"
+      [dismissableMask]="true"
+      [closable]="true"
+      [style]="{ width: '98vw', height: '100%', top: '-30px' }"
+      [minY]="60"
+      [resizable]="true"
+    >
+        <div style="padding: 5px;">
+            <app-connect-wallet></app-connect-wallet>
+
+        </div>
+    </p-dialog>
+
+    <p-dialog
+      [header]="header"
+      [(visible)]="overlayVisible"
+      [dismissableMask]="true"
+      [closable]="true"
+      (onHide)="hideLaunchOverlay()"
+      [style]="{ width: '98vw', height: '100vw', top: '-30px' }"
+      [minY]="60"
+      [resizable]="true"
+    >
+      <app-landing></app-landing>
+    </p-dialog>
+
+    <p-dialog
+      [header]="header"
+      [(visible)]="connectWalletVisible"
+      [dismissableMask]="true"
+      [closable]="true"
+      [modal]="true"
+      [style]="{ width: '80vw', height: '50%', top: '-30px' }"
+      [minY]="60"
+      [resizable]="true"
+    >
+    <div style="padding: 5px;">
+        <app-connect-wallet></app-connect-wallet>
+      </div>
+    </p-dialog>
+  </div>
 </div>
