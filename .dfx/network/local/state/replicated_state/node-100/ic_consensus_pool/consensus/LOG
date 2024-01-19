@@ -19064,3 +19064,14 @@ Write Stall (count): cf-l0-file-count-limit-delays-with-ongoing-compaction: 0, c
 Block cache entry stats(count,size,portion): DataBlock(21,46.54 KB,0.568163%) Misc(1,0.00 KB,0%)
 
 ** File Read Latency Histogram By Level [CUS] **
+2024/01/19-01:40:18.108987 13121048576 [db/db_impl/db_impl.cc:1085] ------- DUMPING STATS -------
+2024/01/19-01:40:18.110375 13121048576 [db/db_impl/db_impl.cc:1086] 
+** DB Stats **
+Uptime(secs): 132918.7 total, 600.0 interval
+Cumulative writes: 521K writes, 578K keys, 521K commit groups, 1.0 writes per commit group, ingest: 0.16 GB, 0.00 MB/s
+Cumulative WAL: 521K writes, 0 syncs, 521080.00 writes per sync, written: 0.16 GB, 0.00 MB/s
+Cumulative stall: 00:00:0.000 H:M:S, 0.0 percent
+Interval writes: 8588 writes, 9542 keys, 8588 commit groups, 1.0 writes per commit group, ingest: 2.68 MB, 0.00 MB/s
+Interval WAL: 8588 writes, 0 syncs, 8588.00 writes per sync, written: 0.00 GB, 0.00 MB/s
+Interval stall: 00:00:0.000 H:M:S, 0.0 percent
+Write Stall (count): write-buffer-manager-limit-stops: 0, 
