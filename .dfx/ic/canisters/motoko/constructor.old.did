@@ -1,7 +1,0 @@
-service : {
-  addData: (text, text) -> () oneway;
-  getData: () -> (vec record {
-                        text;
-                        text;
-                      }) query;
-}

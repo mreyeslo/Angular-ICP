@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  MOTOKO_CANISTER_ID: process.env.MOTOKO_CANISTER_ID,
-  MOTOKO_CANISTER_HOST: process.env.MOTOKO_CANISTER_HOST
+  UI_CANISTER_ID: "yticf-nyaaa-aaaap-abv5q-cai",
+  API_CANISTER_ID: process.env.API_CANISTER_ID,
+  API_CANISTER_HOST: process.env.API_CANISTER_HOST
 };

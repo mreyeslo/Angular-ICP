@@ -2,6 +2,9 @@ const path = require("path");
 const webpack = require("webpack");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
+const isProduction = process.argv[process.argv.indexOf('--mode') + 1] === 'production';
+console.log(process.env.NODE_ENV);
+
 const localCanisterHost = 'http://127.0.0.1:8002';
 const productionCanisterHost = 'https://ic0.app';
 const network = process.env.DFX_NETWORK || (process.env.NODE_ENV === "production" ? "ic" : "local");
@@ -40,6 +43,7 @@ function initCanisterHost() {
   canisterHost = isDevelopment ? localCanisterHost : productionCanisterHost;
 }
 initCanisterHost();
+console.log(canisters);
 //for @angular-builders/custom-webpack
 //just the Plugins and configs needed for the IC build process
 module.exports = {
@@ -47,13 +51,14 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
-      MOTOKO_CANISTER_ID: canisters["motoko"],
-      MOTOKO_CANISTER_HOST: canisterHost
+      INTERNET_IDENTITY_CANISTER_ID: canisters["internet_identity"],
+      API_CANISTER_ID: canisters["api"],
+      API_CANISTER_HOST: canisterHost
     }),
     new webpack.ProvidePlugin({
       Buffer: [require.resolve("buffer/"), "Buffer"],
       process: require.resolve("process/browser"),
-    }),
+    })
   ],
   // proxy /api to port 8000 during development
   devServer: {

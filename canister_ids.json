@@ -1,6 +1,9 @@
 {
-  "motoko": {
+  "api": {
     "ic":"375gn-ryaaa-aaaag-qc3sa-cai"
+  },
+  "internet_identity": {
+    "ic":"gzehi-7aaaa-aaaak-afkcq-cai"
   },
   "www": {
     "ic": "yticf-nyaaa-aaaap-abv5q-cai"

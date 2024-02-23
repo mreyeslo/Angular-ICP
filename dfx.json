@@ -1,14 +1,14 @@
 {
   "canisters": {
-    "3rp_api": {
+    "api": {
       "type": "custom",
       "main": "api/src/index.ts",
       "candid": "api/src/index.did",
-      "build": "npx azle 3rp_api",
-      "wasm": ".azle/3rp_api/3rp_api.wasm",
+      "build": "npx azle api",
+      "wasm": ".azle/api/api.wasm",
       "gzip": true,
       "declarations": {
-        "output": "test/dfx_generated/3rp_api",
+        "output": "src/declarations/api",
         "node_compatibility": true
       }
     },
@@ -26,7 +26,8 @@
     },
     "www": {
       "dependencies": [
-        "3rp_api"
+        "api",
+        "internet_identity"
       ],
       "frontend": {
         "entrypoint": "dist/www/index.html"
@@ -35,6 +36,12 @@
         "dist/www"
       ],
       "type": "assets"
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8002",
+      "type": "ephemeral"
     }
   }
 }

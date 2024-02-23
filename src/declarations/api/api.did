@@ -1,12 +1,13 @@
 service: () -> {
+    deleteAllOrgs: () -> (vec text);
+    deleteAllUsers: () -> (vec text);
     getAllActivity: () -> (vec text) query;
-    getAllOrganizationUsers: (text) -> (text);
     getOrganizationAdmins: (text) -> (vec vec text) query;
-    getOrganizationUsers: (text) -> (text);
     getOrganizations: () -> (vec text) query;
     getUsers: () -> (vec text) query;
-    insertOrganization: (text) -> (text);
-    insertOrganizationUser: (text, text) -> (text);
+    insertOrganization: (text, text) -> (text);
+    insertOrganizationUser: (text, text) -> (opt text);
+    isLoggedIn: () -> (bool);
     logActivity: (text, text) -> (text);
-    logLogin: (text) -> (text);
+    logLogin: (text, text) -> (text);
 }

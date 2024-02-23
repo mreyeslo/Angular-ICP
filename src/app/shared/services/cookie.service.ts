@@ -4,7 +4,7 @@ import { CookieService } from "ngx-cookie-service";
 @Injectable({
     providedIn: "root",
 })
-export class DappCookieService {
+export class DappCookieService { 
     defaultApplicationCache = { viewLaunchOverlay: true };
     applicationCache: any = this.defaultApplicationCache;
     constructor(private _cookieService: CookieService) {

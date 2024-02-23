@@ -1,12 +1,12 @@
 {
-  "name": "hello-angular-motoko",
+  "name": "3rp.io",
   "version": "0.0.3",
   "author": {
     "name": "Michael Reyes",
     "email": "mreyes@webassemblyio.com",
     "url": "www.webassemblyio.com"
   },
-  "description": "Angular 17 - Motoko",
+  "description": "Angular 17 - Azle",
   "keywords": [
     "Internet Computer",
     "Motoko",
@@ -18,18 +18,20 @@
     "build": "",
     "prebuild": "",
     "prestart": "",
-    "init:dfx": " npm run restart:clean:dfx && npm run refresh:motoko && dfx stop",
-    "start": "rm -rf .dfx && npx kill-port 8002 && npx kill-port 4200 && npm run restart:clean:dfx && npm run refresh:motoko && npm run serve:both && npm run print:ng",
+    "init:dfx": " npm run restart:clean:dfx && npm run refresh:api && dfx stop",
+    "start": "rm -rf .dfx && npx kill-port 8002 && npx kill-port 4200 && npm run restart:clean:dfx && npm run refresh:api && npm run refresh:ii && npm run generate:api && npm run serve:both && npm run print:ng",
     "test": "npm run restart:dfx && ng test",
+    "dfx:local": "npm run restart:clean:dfx && npm run refresh:api && npm run generate:api ",
     "deploy:dfx": "npm run restart:dfx && npm run build:prod && dfx deploy --network ic --no-wallet",
-    "serve:both": "concurrently -k \"npm run watch:motoko\" \"ng serve && dfx stop\"",
-    "watch:motoko": "nodemon --watch src --ext mo -x \"npm run refresh:motoko\"",
+    "serve:both": "concurrently -k \"npm run watch:api\" \"ng serve && dfx stop\"",
+    "watch:api": "nodemon --watch src --ext mo -x \"npm run refresh:api\"",
     "print:dfx:www": "echo local IC server: http://127.0.0.1:8000/?canisterId=$(dfx canister id www)",
-    "print:dfx:motoko": "echo local IC server: http://127.0.0.1:8000/?canisterId=$(dfx canister id motoko)",
-    "generate:motoko": "dfx generate motoko",
+    "print:dfx:api": "echo local IC server: http://127.0.0.1:8000/?canisterId=$(dfx canister id api)",
+    "generate:api": "dfx generate api",
     "restart:dfx": "dfx stop && dfx start --background",
     "restart:clean:dfx": "dfx stop && dfx start --background --clean",
-    "refresh:motoko": "dfx deploy motoko && npm run copy:dfx",
+    "refresh:api": "dfx deploy api && npm run copy:dfx",
+    "refresh:ii": "dfx deploy internet_identity && npm run copy:dfx",
     "copy:dfx": "rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --exclude='*.most' --exclude='*.ts' --delete src/declarations",
     "build:prod": "export NODE_ENV=production && ng build --configuration production",
     "build:dev": "export NODE_ENV=development && ng build --configuration development"
@@ -60,17 +62,19 @@
     "rxjs": "~7.8.1",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.0",
-    "azle": "0.19.0",
-    "uuid": "^9.0.1"
+    "azle": "0.20.1",
+    "uuid": "^9.0.1",
+    "express": "^4.18.2",
+    "sql.js": "1.8.0"
   },
-
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.8",
     "@angular/cli": "^17.0.8",
     "@angular/compiler-cli": "^17.0.0",
-    "@dfinity/agent": "0.11.3",
-    "@dfinity/candid": "0.11.3",
-    "@dfinity/principal": "0.11.3",
+    "@dfinity/agent": "0.15.7",
+    "@dfinity/candid": "0.15.7",
+    "@dfinity/principal": "0.15.7",
+    "@dfinity/auth-client": "^0.15.7",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^12.11.1",
     "assert": "2.0.0",
@@ -100,6 +104,8 @@
     "webpack": "5.89.0",
     "webpack-cli": "4.9.2",
     "webpack-dev-server": "^4.8.1",
+    "@types/express": "^4.17.21",
+    "@types/sql.js": "^1.4.9",
     "ts-node": "^10.9.1"
   }
 }

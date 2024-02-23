@@ -64,7 +64,6 @@ import { PickListModule } from "primeng/picklist";
 import { ProgressBarModule } from "primeng/progressbar";
 import { RadioButtonModule } from "primeng/radiobutton";
 import { RatingModule } from "primeng/rating";
-import { ScrollerModule } from "primeng/scroller";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { ScrollTopModule } from "primeng/scrolltop";
 import { SelectButtonModule } from "primeng/selectbutton";
@@ -113,6 +112,9 @@ import { OrganizationComponent } from './pages/organization/organization.compone
 import { UsersComponent } from './pages/users/users.component';
 import { WebsiteComponent } from './pages/website/website.component';
 import { CrmComponent } from './pages/crm/crm.component';
+import { InternetIdentityService } from "src/service/internet-identity.service";
+import { MotokoService } from "./motoko.service";
+import { ScrollerModule } from 'primeng/scroller';
 
 @NgModule({
   imports: [
@@ -132,6 +134,9 @@ import { CrmComponent } from './pages/crm/crm.component';
     StyleClassModule,
     OverlayPanelModule,
     SkeletonModule,
+    ScrollerModule,
+    ScrollPanelModule,
+    CardModule,
     RouterModule.forRoot([
       {
         path: "",
@@ -161,6 +166,6 @@ import { CrmComponent } from './pages/crm/crm.component';
     CrmComponent
   ],
   bootstrap: [AppComponent],
-  providers: [PhotoService, NodeService],
+  providers: [PhotoService, NodeService, InternetIdentityService,MotokoService],
 })
 export class AppModule {}

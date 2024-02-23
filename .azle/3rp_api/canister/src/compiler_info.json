@@ -1,1 +1,0 @@
-{"canister_methods":{"queries":[{"name":"getFromKey","composite":false},{"name":"clearOrganization","composite":false},{"name":"keysOrganization","composite":false},{"name":"valuesOrganization","composite":false},{"name":"itemsOrganization","composite":false}],"updates":[{"name":"insertOrganization"}],"callbacks":{}}}

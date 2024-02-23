@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { MotokoService } from "./motoko.service";
 import { ButtonModule } from 'primeng/button';
 import { Terminal, TerminalModule } from 'primeng/terminal';
 import { Router } from "@angular/router";
@@ -9,30 +8,31 @@ import { Router } from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   public text = null;
   public response = 'Nothing yet';
   public duration: number = 0;
-
-  constructor(private motokoService: MotokoService, private router: Router){
+  iiUrl = "";
+  constructor(private router: Router) {
   }
   ngOnInit(): void {
-      this.add(Date.now().toString())
+   
+    this.add(Date.now().toString())
   }
-  public async add(username:string = 'Angular'){
-    const start = Date.now();
-	  console.log("start request")
-    this.response = await this.motokoService.add(username);
-    this.duration = Date.now() - start;
-    console.log("request time", this.duration)
+  public async add(username: string = 'Angular') {
+    // const start = Date.now();
+    // console.log("start request")
+    // this.response = await this.motokoService.add(username);
+    // this.duration = Date.now() - start;
+    // console.log("request time", this.duration)
   }
-  public async get(){
-    this.response = await this.motokoService.getAll();
-    console.log("request time", this.response)
+  public async get() {
+    // this.response = await this.motokoService.getAll();
+    // console.log("request time", this.response)
   }
 
 
-  route(){
+  route() {
     this.router.navigateByUrl("dock");
   }
 }

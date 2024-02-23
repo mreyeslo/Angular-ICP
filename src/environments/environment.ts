@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
-  MOTOKO_CANISTER_ID: process.env.MOTOKO_CANISTER_ID,
-  MOTOKO_CANISTER_HOST: process.env.MOTOKO_CANISTER_HOST
+  UI_CANISTER_ID: "yticf-nyaaa-aaaap-abv5q-cai",
+  API_CANISTER_ID: process.env.API_CANISTER_ID,
+  API_CANISTER_HOST: process.env.API_CANISTER_HOST,
+  INTERNET_IDENTITY_CANISTER_ID: process.env.INTERNET_IDENTITY_CANISTER_ID
 };
